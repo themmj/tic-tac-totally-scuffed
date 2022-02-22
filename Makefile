@@ -1,4 +1,4 @@
-
 main: main.c
 	mkdir -p out
-	gcc -g main.c -o out/main
+	gcc -g main.c game.c -o out/main
+
