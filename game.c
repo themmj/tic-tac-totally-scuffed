@@ -26,7 +26,19 @@ unsigned long long get_coordinate_input(const char *name, unsigned long long lim
 int check_win(ttt_game *game);
 
 int game_create(ttt_game *game, int argc, const char **argv) {
-    game->line_size  = 3;
+    // defaults
+    game->line_size = 3;
+
+    // overwriting defaults
+    for (int i = 1; i + 1 < argc; i += 2) {
+        const char *flag  = argv[i];
+        const char *value = argv[i + 1];
+        switch (*flag) {
+            case 's':
+                game->line_size = strtoll(value, NULL, 10);
+                break;
+        }
+    }
     game->cell_count = game->line_size * game->line_size;
     if (game->cell_count)
         game->field = malloc(sizeof(unsigned char) * game->cell_count);
